@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es" data-variant="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeVault — Agencia de Programación Moderna</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i data-cld-icon="code"></i>
+                <span>CodeVault</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#portfolio">Portafolio</a></li>
+                <li><a href="#testimonials">Testimonios</a></li>
+                <li><a href="#pricing">Precios</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Soluciones de Programación</h1>
+            <p class="hero-lead">Transformamos tus ideas en aplicaciones escalables, seguras y de alto rendimiento. Expertos en tecnologías modernas para tu negocio.</p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary">Comenzar Proyecto</a>
+                <a href="#portfolio" class="btn btn-secondary">Ver Nuestro Trabajo</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="IMG/Programacion.jpg" data-cld-illustration="team of developers collaborating on code at desks with multiple screens" alt="Our development team">
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestros Servicios</h2>
+                <p>Ofrecemos soluciones integrales de software adaptadas a tus necesidades específicas</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-cld-icon="globe"></i>
+                    </div>
+                    <h3>Desarrollo Web</h3>
+                    <p>Aplicaciones web modernas, responsivas y escalables usando React, Vue, Angular y Node.js para máximo rendimiento.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-cld-icon="smartphone"></i>
+                    </div>
+                    <h3>Automatizacion de procesos</h3>
+                    <p>Instalacion y programacion de sensores controlados por Arduino UNO, Arduino NANO, FPGA </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-cld-icon="cloud"></i>
+                    </div>
+                    <h3>Soluciones Cloud</h3>
+                    <p>Infraestructura en AWS, Google Cloud y Azure. Escalabilidad, seguridad y disponibilidad garantizadas.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-cld-icon="zap"></i>
+                    </div>
+                    <h3>Integración de IA</h3>
+                    <p>Machine learning, procesamiento de lenguaje natural y automatización inteligente para optimizar procesos.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-cld-icon="settings"></i>
+                    </div>
+                    <h3>DevOps y Automatización</h3>
+                    <p>CI/CD pipelines, contenedorización, monitoreo y gestión de infraestructura como código.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-cld-icon="shield"></i>
+                    </div>
+                    <h3>Seguridad y Cumplimiento</h3>
+                    <p>Auditorías de seguridad, pruebas de penetración, GDPR compliance y protección de datos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestro Portafolio</h2>
+                <p>Proyectos exitosos entregados para empresas de diferentes industrias</p>
+            </div>
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="mobile">Móvil</button>
+                <button class="filter-btn" data-filter="cloud">Cloud</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="web">
+                    <img data-cld-photo="modern e-commerce platform dashboard with analytics charts and product listings" alt="E-commerce Platform">
+                    <div class="portfolio-overlay">
+                        <h3>Plataforma E-commerce</h3>
+                        <p>Marketplace escalable con 50k+ usuarios activos mensuales</p>
+                        <a href="#" class="view-link">Ver Proyecto →</a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="mobile">
+                    <img data-cld-photo="mobile app interface for fitness tracking with workout data visualization" alt="Fitness App">
+                    <div class="portfolio-overlay">
+                        <h3>App de Fitness</h3>
+                        <p>iOS y Android con 100k descargas, integración de wearables</p>
+                        <a href="#" class="view-link">Ver Proyecto →</a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="cloud">
+                    <img data-cld-photo="cloud infrastructure diagram showing servers databases and load balancing architecture" alt="Cloud Infrastructure">
+                    <div class="portfolio-overlay">
+                        <h3>Sistema de Gestión Cloud</h3>
+                        <p>SaaS multi-tenant con procesamiento de datos en tiempo real</p>
+                        <a href="#" class="view-link">Ver Proyecto →</a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="web">
+                    <img data-cld-photo="financial dashboard with stock charts real time data and performance metrics" alt="Financial Dashboard">
+                    <div class="portfolio-overlay">
+                        <h3>Dashboard Financiero</h3>
+                        <p>Análisis en tiempo real para gestión de carteras</p>
+                        <a href="#" class="view-link">Ver Proyecto →</a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="mobile">
+                    <img data-cld-photo="mobile banking application showing account balance transfers and financial transactions" alt="Banking App">
+                    <div class="portfolio-overlay">
+                        <h3>App Bancaria</h3>
+                        <p>Solución fintech con seguridad de nivel enterprise</p>
+                        <a href="#" class="view-link">Ver Proyecto →</a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="cloud">
+                    <img data-cld-photo="data center with server racks monitoring systems and network infrastructure" alt="Data Center">
+                    <div class="portfolio-overlay">
+                        <h3>Infraestructura de Datos</h3>
+                        <p>Data lake con procesamiento distribuido y analytics avanzado</p>
+                        <a href="#" class="view-link">Ver Proyecto →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Lo que Dicen Nuestros Clientes</h2>
+                <p>Empresas líderes confían en CodeVault para sus proyectos críticos</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"CodeVault transformó nuestra visión en una plataforma robusta que escaló de 0 a un millón de usuarios en 6 meses. El equipo fue excepcional en manejo de plazos y comunicación."</p>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <strong>Martín García</strong>
+                            <span>CEO, TechStartup Labs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Su expertise en arquitectura cloud nos permitió reducir costos de infraestructura en un 40% manteniendo mayor disponibilidad. Profesionales de alto nivel."</p>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <strong>Sofía Rodríguez</strong>
+                            <span>CTO, Enterprise Solutions Inc</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"La aplicación móvil que desarrollaron para nosotros se convirtió en nuestro canal de ingresos principal. Atención al detalle impecable en cada feature."</p>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <strong>Carlos López</strong>
+                            <span>Product Manager, FinanceHub</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Planes de Precios</h2>
+                <p>Elige el plan que mejor se adapta a tu proyecto</p>
+            </div>
+            <div class="pricing-toggle">
+                <label>
+                    <input type="checkbox" id="billingToggle">
+                    <span>Mensual</span>
+                    <span class="toggle-slider"></span>
+                    <span>Anual (Ahorra 20%)</span>
+                </label>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Startup</h3>
+                        <p>Para proyectos iniciales</p>
+                    </div>
+                    <div class="pricing-amount">
+                        <span class="price" data-monthly="4999" data-annual="47992">$4,999</span>
+                        <span class="period">/proyecto</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i data-cld-icon="check"></i> Desarrollo Web</li>
+                        <li><i data-cld-icon="check"></i> Diseño Responsive</li>
+                        <li><i data-cld-icon="check"></i> Hosting Básico</li>
+                        <li><i data-cld-icon="check"></i> 40 horas/mes</li>
+                        <li><i data-cld-icon="x"></i> Soporte 24/7</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary">Comenzar</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="featured-badge">Más Popular</div>
+                    <div class="pricing-header">
+                        <h3>Professional</h3>
+                        <p>Para crecimiento rápido</p>
+                    </div>
+                    <div class="pricing-amount">
+                        <span class="price" data-monthly="12999" data-annual="124992">$12,999</span>
+                        <span class="period">/proyecto</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i data-cld-icon="check"></i> Web + Mobile</li>
+                        <li><i data-cld-icon="check"></i> Cloud Infrastructure</li>
+                        <li><i data-cld-icon="check"></i> API RESTful</li>
+                        <li><i data-cld-icon="check"></i> 120 horas/mes</li>
+                        <li><i data-cld-icon="check"></i> Soporte 24/7</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Comenzar</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <p>Soluciones personalizadas</p>
+                    </div>
+                    <div class="pricing-amount">
+                        <span class="price" data-monthly="29999" data-annual="287991">$29,999</span>
+                        <span class="period">/proyecto</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i data-cld-icon="check"></i> Stack Tecnológico Completo</li>
+                        <li><i data-cld-icon="check"></i> Arquitectura Escalable</li>
+                        <li><i data-cld-icon="check"></i> Security Audits</li>
+                        <li><i data-cld-icon="check"></i> Equipo Dedicado</li>
+                        <li><i data-cld-icon="check"></i> Soporte Premium 24/7</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary">Contactar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestro Proceso</h2>
+                <p>Metodología probada para entregar resultados excepcionales</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <i data-cld-icon="lightbulb"></i>
+                    <h3>Descubrimiento</h3>
+                    <p>Entendemos tu negocio, objetivos y desafíos tecnológicos para diseñar la solución perfecta.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <i data-cld-icon="pencil"></i>
+                    <h3>Diseño y Planificación</h3>
+                    <p>Creamos arquitectura escalable, wireframes detallados y documentación técnica completa.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <i data-cld-icon="code"></i>
+                    <h3>Desarrollo Ágil</h3>
+                    <p>Entregables incrementales con sprints de 2 semanas, reviews semanales y ajustes continuos.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <i data-cld-icon="beaker"></i>
+                    <h3>Testing y QA</h3>
+                    <p>Pruebas exhaustivas, automatización de calidad y cobertura de todos los casos de uso.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">05</div>
+                    <i data-cld-icon="rocket"></i>
+                    <h3>Deploy y Lanzamiento</h3>
+                    <p>Despliegue sin downtime, monitoreo en tiempo real y soporte post-lanzamiento.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">06</div>
+                    <i data-cld-icon="trending-up"></i>
+                    <h3>Soporte Continuo</h3>
+                    <p>Mantenimiento, actualizaciones, optimización y nuevas features basadas en métricas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h2>Hablemos de tu Proyecto</h2>
+                    <p>Cuéntanos sobre tu idea y te enviaremos una propuesta personalizada en 48 horas.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i data-cld-icon="mail"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <p>ov7224@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i data-cld-icon="phone"></i>
+                            <div>
+                                <strong>Teléfono</strong>
+                                <p>+52 464 654 0835</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i data-cld-icon="map-pin"></i>
+                            <div>
+                                <strong>Ubicación</strong>
+                                <p>Salamanca, Mexico</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required aria-label="Your full name">
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required aria-label="Your email address">
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Empresa</label>
+                        <input type="text" id="company" name="company" aria-label="Your company name">
+                    </div>
+                    <div class="form-group">
+                        <label for="project">Descripción del Proyecto</label>
+                        <textarea id="project" name="project" rows="5" required aria-label="Describe your project"></textarea>
+                        <span class="error-message"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                    <div class="form-message success-message" style="display: none;">
+                        ¡Gracias! Nos pondremos en contacto pronto.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CodeVault</h3>
+                    <p>Agencia de desarrollo de software especializada en soluciones tecnológicas escalables y modernas.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub"><i data-cld-icon="github"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i data-cld-icon="linkedin"></i></a>
+                        <a href="#" aria-label="Twitter"><i data-cld-icon="twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#services">Desarrollo Web</a></li>
+                        <li><a href="#services">Aplicaciones Móviles</a></li>
+                        <li><a href="#services">Soluciones Cloud</a></li>
+                        <li><a href="#services">Seguridad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#portfolio">Portafolio</a></li>
+                        <li><a href="#testimonials">Testimonios</a></li>
+                        <li><a href="#pricing">Precios</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacidad</a></li>
+                        <li><a href="#">Términos</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CodeVault. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+<script src="app.js"></script>
+</body>
+</html>
