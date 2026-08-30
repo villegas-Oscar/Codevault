@@ -1,0 +1,1619 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;600&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Karla:wght@400;500;600&family=Nunito+Sans:wght@400;600;800&display=swap");
+
+/* ============================================================================
+   BASE  =  the "minimal" variant, light scheme
+   ========================================================================= */
+:root {
+  color-scheme: light dark;
+
+  /* ── Accent channels (DECORATIVE ONLY — see rule 4) ──────────────────── */
+  --accent-h: 174;
+  --accent-s: 62%;
+  --accent-l: 27%;
+
+  /* ── Surfaces ────────────────────────────────────────────────────────── */
+  --page: hsl(180 14% 98%);
+  --surface: #ffffff;
+  --surface-2: hsl(180 12% 95%);
+  /* No-op hook: an "interesting" surface for heroes, callouts, feature cards.
+     Base points it back at --surface, so minimal shows no second surface. */
+  --surface-accent: var(--surface);
+  --surface-sunken: var(--surface-2);
+  --scrim: hsl(190 30% 8% / 0.55);
+
+  /* ── Text ────────────────────────────────────────────────────────────── */
+  --text: hsl(190 20% 12%);
+  --text-muted: hsl(190 10% 40%);
+  --text-faint: hsl(190 8% 55%);
+  /* Text sitting on --surface-accent. No-op in base. */
+  --on-surface-accent: var(--text);
+
+  /* ── Brand: the fill/text split (rule 3) ─────────────────────────────── */
+  --primary: hsl(174 62% 27%); /* FILL. Judged against --on-primary.        */
+  --primary-hover: hsl(174 62% 22%);
+  --on-primary: #ffffff; /* label on --primary — 6.4:1 here          */
+  --brand-text: hsl(174 66% 24%); /* accent used AS TEXT, judged on --page    */
+
+  /* ── Status: same split, applied per role ────────────────────────────── */
+  --success: hsl(152 55% 30%);
+  --success-soft: hsl(152 44% 94%);
+  --success-ink: hsl(152 60% 22%);
+  --warning: hsl(35 85% 45%);
+  --warning-soft: hsl(38 90% 94%);
+  --warning-ink: hsl(28 80% 28%);
+  --danger: hsl(0 62% 45%);
+  --danger-soft: hsl(0 70% 96%);
+  --danger-ink: hsl(0 65% 35%);
+
+  /* ── Lines ───────────────────────────────────────────────────────────────
+     TWO DIFFERENT CONTRACTS, do not swap them:
+     --border        decorative separator (card edge, table rule). Free to be
+                     faint — WCAG exempts purely decorative boundaries.
+     --border-strong the boundary that IDENTIFIES an interactive control (input
+                     outline, ghost button). WCAG 1.4.11 requires >= 3:1 against
+                     the surface behind it, so every variant's value below is
+                     solved to that. Measured: the first pass shipped these ~74%
+                     light and four of five variants came in at 1.8-2.8:1, i.e.
+                     an input whose edge you cannot reliably see. */
+  --border: hsl(190 12% 88%);
+  --border-strong: hsl(190 12% 56%);
+  --border-width: 1px;
+  --border-width-strong: 2px; /* playful's sticker outline rides on this  */
+
+  /* ── Focus ring — derived, never baked (rule 2) ──────────────────────── */
+  --ring: 0 0 0 3px hsl(var(--accent-h) var(--accent-s) var(--accent-l) / 0.32);
+  --ring-offset: 2px;
+
+  /* ── Radius ──────────────────────────────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* ── Shadow ──────────────────────────────────────────────────────────── */
+  --shadow-1: 0 1px 2px hsl(190 25% 12% / 0.06);
+  --shadow-2: 0 2px 8px hsl(190 25% 12% / 0.08);
+  --shadow-3: 0 12px 32px hsl(190 25% 12% / 0.12);
+
+  /* ── Space: 4/8 grid ─────────────────────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  /* Density knob: dashboards tighten, marketing pages breathe. */
+  --density: 1;
+  --section-y: calc(var(--space-9) * var(--density));
+  --card-p: calc(var(--space-5) * var(--density));
+
+  /* ── Type: families ──────────────────────────────────────────────────── */
+  /* TWO slots, always. Minimal points both at one family and lets weight do
+     the work — that IS the minimal position, not a shortcut. */
+  --font-display: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Roboto Mono", Menlo, monospace;
+
+  /* ── Type: size, fluid so 360px needs no media query ─────────────────── */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: clamp(1.25rem, 1.16rem + 0.38vw, 1.375rem);
+  --fs-xl: clamp(1.5rem, 1.32rem + 0.75vw, 1.75rem);
+  --fs-2xl: clamp(1.75rem, 1.36rem + 1.7vw, 2.25rem);
+  --fs-3xl: clamp(2.125rem, 1.42rem + 3vw, 3rem);
+  --fs-4xl: clamp(2.5rem, 1.35rem + 4.9vw, 4rem);
+
+  /* ── Type: craft. Every token here was hand-typed in all three stress
+        builds before it existed. ──────────────────────────────────────── */
+  --fw-body: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-display: 600;
+  --lh-display: 1.05;
+  --lh-heading: 1.2;
+  --lh-body: 1.6;
+  --lh-ui: 1.35; /* buttons, chips, table cells, nav        */
+  --tracking-display: -0.02em;
+  --tracking-body: 0;
+  --tracking-label: 0.08em; /* uppercase eyebrows — missing in all 3   */
+  --measure-display: 20ch; /* headline wrap                           */
+  --measure-lead: 46ch; /* sub-headline / intro paragraph          */
+  --measure-prose: 68ch; /* running body text                       */
+
+  /* ── Icons ───────────────────────────────────────────────────────────── */
+  --icon-size: 20px;
+  --icon-stroke: 1.75;
+
+  /* ── Motion ──────────────────────────────────────────────────────────── */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast: 120ms;
+  --dur: 200ms;
+
+  /* ── Decoration escape hatch ─────────────────────────────────────────── */
+  /* Some expression is DOM + keyframes, not colour — confetti, blobs, grain.
+     Wrap that markup in an element styled `display: var(--decor-display)` so a
+     variant can switch it on without the markup changing.
+
+     Base is `none` for the same reason --surface-accent is `var(--surface)`:
+     a no-op hook must render as though it did not exist, so restraint is the
+     default and expression is opt in. It also keeps the no-attribute page and
+     `data-variant="minimal"` byte-identical — otherwise "omit the attribute and
+     the page is minimal" is a lie, which a specimen render caught. */
+  --decor-display: none;
+
+  /* ── Shell rails — app screens only ──────────────────────────────────────
+     ADDITIVE, 2026-08-21. Nothing above this line changed.
+
+     A marketing page is a vertical stack of sections and never needed these.
+     An app screen is a FIXED SHELL wrapping one scrolling region, and its rails
+     are structural measurements the space scale does not carry. Each of these
+     was a hand-typed px literal in the dashboard prototype — the same signal
+     that produced every token in the craft sections above.
+
+     Deliberately NOT overridden per variant: a sidebar is the same width
+     whether the page is corporate or playful. Density, type, colour and radius
+     carry the variant; the rails stay put. If a variant ever needs a different
+     rail, that is a layout decision and belongs in the component, not here
+     (rule 1 — variant blocks hold custom properties only).
+
+     Density is already a first-class token above (--density, with --section-y
+     and --card-p derived from it). App screens set --density on the shell
+     element to tighten everything inside in one move; they do not need a
+     second scale. */
+  --shell-sidebar-w: 264px;
+  --shell-topbar-h: 68px;
+  /* minmax() floor for auto-fit card grids — stat rows, tile grids. Must be a
+     real length: a percentage or bare number makes the track collapse. */
+  --grid-min-card: 200px;
+
+  /* ── Stacking order — app screens only ───────────────────────────────────
+     ADDITIVE, 2026-08-21. Named layers so overlays cannot be ordered by
+     whoever picked the larger number. Gaps are deliberate: room to slot a
+     layer between two without renumbering.
+
+     NOTE there is no --z-modal. A native <dialog> opened with showModal()
+     renders in the browser's TOP LAYER, which is above every z-index on the
+     page no matter how large — so giving it one would be a number that never
+     applies and that someone would later "fix" by raising. The corollary is
+     that a toast is BELOW an open modal dialog and cannot be raised above it
+     with z-index; that is correct here, because a modal blocks interaction
+     anyway. */
+  --z-sticky: 5; /* topbar */
+  --z-skip: 10; /* skip link, above sticky chrome */
+  --z-popover: 50; /* menus, popovers */
+  --z-toast: 200; /* toasts, above popovers, below the top layer */
+}
+
+/* Shared dark scheme for every variant that does not force its own.
+   Only role values change; structure tokens are untouched. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent-l: 58%;
+
+    --page: hsl(200 18% 8%);
+    --surface: hsl(200 15% 11%);
+    --surface-2: hsl(200 13% 16%);
+    --surface-sunken: hsl(200 20% 6%);
+    --scrim: hsl(200 40% 3% / 0.66);
+
+    --text: hsl(190 15% 94%);
+    --text-muted: hsl(195 10% 66%);
+    --text-faint: hsl(195 8% 52%);
+
+    /* The split earns its keep here: the fill goes BRIGHTER and the label on
+       it flips to near-black, while --brand-text stays legible on --page. */
+    --primary: hsl(174 58% 58%);
+    --primary-hover: hsl(174 58% 66%);
+    --on-primary: hsl(200 20% 9%);
+    --brand-text: hsl(174 58% 62%);
+
+    --success: hsl(152 48% 52%);
+    --success-soft: hsl(152 30% 16%);
+    --success-ink: hsl(152 50% 72%);
+    --warning: hsl(38 80% 58%);
+    --warning-soft: hsl(35 40% 16%);
+    --warning-ink: hsl(38 80% 72%);
+    --danger: hsl(2 65% 60%);
+    --danger-soft: hsl(0 35% 17%);
+    --danger-ink: hsl(2 70% 76%);
+
+    --border: hsl(200 12% 22%);
+    --border-strong: hsl(200 10% 42%);
+
+    /* Dark surfaces swallow blur. Separation comes from the border above, so
+       the shadows step back rather than getting darker. */
+    --shadow-1: 0 1px 2px hsl(0 0% 0% / 0.4);
+    --shadow-2: 0 2px 10px hsl(0 0% 0% / 0.45);
+    --shadow-3: 0 16px 40px hsl(0 0% 0% / 0.55);
+  }
+}
+
+/* ============================================================================
+   VARIANTS — custom properties only, nothing else (rule 1)
+   ========================================================================= */
+
+/* ── minimal ──────────────────────────────────────────────────────────────
+   An explicit no-op, so `data-variant="minimal"` is valid rather than a typo
+   that silently does nothing. */
+[data-variant="minimal"] {
+  /* Intentionally identical to :root. Declared so the attribute is a valid,
+     self-documenting choice rather than a typo that silently does nothing. */
+  --decor-display: none;
+}
+
+/* ── corporate ────────────────────────────────────────────────────────────
+   Institutional, dense, high trust. Serif display over a humanist sans; a
+   deep navy that reads as authority rather than as a SaaS gradient. */
+[data-variant="corporate"] {
+  --accent-h: 214;
+  --accent-s: 72%;
+  --accent-l: 34%;
+
+  --page: hsl(215 24% 97%);
+  --surface: #ffffff;
+  --surface-2: hsl(215 22% 94%);
+  --surface-accent: hsl(215 40% 96%);
+
+  --text: hsl(215 32% 14%);
+  --text-muted: hsl(215 14% 40%);
+  --text-faint: hsl(215 12% 54%);
+
+  --primary: hsl(214 76% 32%);
+  --primary-hover: hsl(214 76% 26%);
+  --on-primary: #ffffff;
+  --brand-text: hsl(214 78% 30%);
+
+  --border: hsl(215 20% 87%);
+  --border-strong: hsl(215 18% 55%);
+
+  --radius-sm: 2px;
+  --radius: 4px;
+  --radius-lg: 6px;
+
+  --shadow-1: 0 1px 1px hsl(215 30% 20% / 0.07);
+  --shadow-2: 0 1px 4px hsl(215 30% 20% / 0.1);
+  --shadow-3: 0 8px 24px hsl(215 30% 20% / 0.13);
+
+  --font-display: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --fw-display: 600;
+  --lh-display: 1.12;
+  --tracking-display: -0.01em;
+
+  --density: 0.85;
+  --decor-display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-variant="corporate"] {
+    --page: hsl(215 28% 9%);
+    --surface: hsl(215 24% 12%);
+    --surface-2: hsl(215 20% 17%);
+    --surface-accent: hsl(215 34% 15%);
+    --text: hsl(215 16% 94%);
+    --text-muted: hsl(215 12% 68%);
+    --primary: hsl(214 78% 62%);
+    --primary-hover: hsl(214 82% 70%);
+    --on-primary: hsl(215 40% 10%);
+    --brand-text: hsl(214 80% 70%);
+    --border: hsl(215 16% 24%);
+    --border-strong: hsl(215 14% 44%);
+  }
+}
+
+/* ── elegant ──────────────────────────────────────────────────────────────
+   Editorial. A high-contrast serif at display sizes, near-square corners, no
+   shadows at all — separation is a hairline. Deep plum instead of the usual
+   cream-and-terracotta pairing. */
+[data-variant="elegant"] {
+  --accent-h: 332;
+  --accent-s: 30%;
+  --accent-l: 30%;
+
+  --page: hsl(24 20% 97%);
+  --surface: hsl(30 30% 99%);
+  --surface-2: hsl(24 16% 93%);
+  --surface-accent: hsl(332 16% 95%);
+
+  --text: hsl(330 12% 13%);
+  --text-muted: hsl(330 8% 41%);
+  --text-faint: hsl(330 7% 56%);
+
+  --primary: hsl(332 34% 28%);
+  --primary-hover: hsl(332 36% 21%);
+  --on-primary: hsl(30 30% 98%);
+  --brand-text: hsl(332 38% 30%);
+
+  --border: hsl(24 14% 86%);
+  --border-strong: hsl(330 10% 55%);
+
+  --radius-sm: 0;
+  --radius: 2px;
+  --radius-lg: 3px;
+
+  --shadow-1: none;
+  --shadow-2: none;
+  --shadow-3: 0 24px 60px hsl(330 20% 20% / 0.1);
+
+  --font-display: "Instrument Serif", Georgia, Cambria, "Times New Roman", serif;
+  --font-body: "Karla", ui-sans-serif, system-ui, sans-serif;
+  --fw-display: 400;
+  --lh-display: 0.98;
+  --tracking-display: -0.025em;
+  --tracking-label: 0.14em;
+  --measure-display: 16ch;
+  --measure-prose: 62ch;
+
+  --density: 1.15;
+  --decor-display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-variant="elegant"] {
+    --page: hsl(330 12% 8%);
+    --surface: hsl(330 10% 11%);
+    --surface-2: hsl(330 9% 16%);
+    --surface-accent: hsl(332 16% 14%);
+    --text: hsl(28 18% 93%);
+    --text-muted: hsl(330 8% 66%);
+    --primary: hsl(332 44% 72%);
+    --primary-hover: hsl(332 48% 80%);
+    --on-primary: hsl(330 20% 10%);
+    --brand-text: hsl(332 46% 76%);
+    --border: hsl(330 8% 22%);
+    --border-strong: hsl(330 8% 44%);
+  }
+}
+
+/* ── playful ──────────────────────────────────────────────────────────────
+   Sticker UI: ink outlines, hard offset shadows with no blur, pill radii, a
+   second tinted surface doing real work. The only variant that turns the
+   decoration hook ON. */
+[data-variant="playful"] {
+  --accent-h: 348;
+  --accent-s: 88%;
+  --accent-l: 58%;
+
+  --page: hsl(45 80% 96%);
+  --surface: #ffffff;
+  --surface-2: hsl(45 70% 92%);
+  --surface-accent: hsl(166 60% 90%);
+
+  --text: hsl(255 30% 15%);
+  --text-muted: hsl(255 12% 42%);
+  --text-faint: hsl(255 10% 56%);
+  --on-surface-accent: hsl(174 60% 14%);
+
+  --primary: hsl(348 82% 48%);
+  --primary-hover: hsl(348 82% 40%);
+  --on-primary: #ffffff;
+  --brand-text: hsl(348 76% 40%);
+
+  --border: hsl(255 30% 15%);
+  --border-strong: hsl(255 30% 15%);
+  --border-width: 2px;
+  --border-width-strong: 3px;
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+
+  /* Hard offset, zero blur — the shadow is an outline's shadow, not depth. */
+  --shadow-1: 2px 2px 0 hsl(255 30% 15%);
+  --shadow-2: 4px 4px 0 hsl(255 30% 15%);
+  --shadow-3: 8px 8px 0 hsl(255 30% 15%);
+
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --fw-display: 800;
+  --fw-semibold: 800;
+  --lh-display: 1;
+  --tracking-display: -0.03em;
+
+  --icon-stroke: 2.25;
+  --decor-display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-variant="playful"] {
+    --page: hsl(255 32% 11%);
+    --surface: hsl(255 26% 16%);
+    --surface-2: hsl(255 24% 21%);
+    --surface-accent: hsl(166 34% 20%);
+    --text: hsl(45 60% 95%);
+    --text-muted: hsl(255 12% 70%);
+    --on-surface-accent: hsl(166 60% 88%);
+    --primary: hsl(348 92% 66%);
+    --primary-hover: hsl(348 94% 74%);
+    --on-primary: hsl(255 40% 10%);
+    --brand-text: hsl(348 92% 74%);
+    --border: hsl(45 60% 95%);
+    --border-strong: hsl(45 60% 95%);
+    --shadow-1: 2px 2px 0 hsl(45 60% 95%);
+    --shadow-2: 4px 4px 0 hsl(45 60% 95%);
+    --shadow-3: 8px 8px 0 hsl(45 60% 95%);
+  }
+}
+
+/* ── dark ─────────────────────────────────────────────────────────────────
+   DECLARED LAST, AND UNCONDITIONALLY. This is the whole reason for the file's
+   ordering: `[data-variant="dark"]` and `@media (prefers-color-scheme: dark)
+   :root` have the SAME specificity (0,1,0), so source order is the only thing
+   deciding the winner. Placed here, the dark variant stays dark for a visitor
+   whose OS is set to light — which is what asking for the dark style means. */
+[data-variant="dark"] {
+  --accent-h: 32;
+  --accent-s: 92%;
+  --accent-l: 58%;
+
+  --page: hsl(222 24% 7%);
+  --surface: hsl(222 20% 11%);
+  --surface-2: hsl(222 18% 15%);
+  --surface-sunken: hsl(222 28% 5%);
+  --surface-accent: hsl(222 22% 14%);
+  --scrim: hsl(222 40% 2% / 0.7);
+
+  --text: hsl(220 16% 95%);
+  --text-muted: hsl(220 10% 64%);
+  --text-faint: hsl(220 8% 48%);
+  --on-surface-accent: var(--text);
+
+  --primary: hsl(32 94% 60%);
+  --primary-hover: hsl(32 96% 68%);
+  --on-primary: hsl(28 60% 10%);
+  --brand-text: hsl(36 92% 66%);
+
+  --success: hsl(150 52% 55%);
+  --success-soft: hsl(150 28% 15%);
+  --success-ink: hsl(150 55% 74%);
+  --warning: hsl(45 90% 60%);
+  --warning-soft: hsl(42 36% 16%);
+  --warning-ink: hsl(45 88% 74%);
+  --danger: hsl(3 72% 62%);
+  --danger-soft: hsl(0 32% 16%);
+  --danger-ink: hsl(3 76% 76%);
+
+  --border: hsl(222 14% 20%);
+  --border-strong: hsl(222 12% 42%);
+
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-lg: 10px;
+
+  /* Blur is invisible on near-black. Depth reads as a lighter top edge, so
+     these are inset hairlines rather than drop shadows. */
+  --shadow-1: inset 0 1px 0 hsl(0 0% 100% / 0.04);
+  --shadow-2: inset 0 1px 0 hsl(0 0% 100% / 0.06), 0 2px 12px hsl(0 0% 0% / 0.5);
+  --shadow-3: inset 0 1px 0 hsl(0 0% 100% / 0.07), 0 20px 48px hsl(0 0% 0% / 0.6);
+
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --fw-display: 700;
+  --lh-display: 1.06;
+  --tracking-display: -0.03em;
+  --tracking-label: 0.1em;
+
+  --density: 0.9;
+  --decor-display: none;
+}
+
+/* ============================================================================
+   The floor: enough base styling that a page which writes NO css of its own is
+   still readable and on-system. Everything below reads tokens and sets nothing
+   a variant would want to change.
+   ========================================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--tracking-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--fw-display);
+  line-height: var(--lh-heading);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tracking-display);
+  max-width: var(--measure-display);
+}
+h2 {
+  font-size: var(--fs-2xl);
+  letter-spacing: var(--tracking-display);
+}
+h3 {
+  font-size: var(--fs-xl);
+}
+h4 {
+  font-size: var(--fs-md);
+}
+
+p {
+  margin: 0;
+  max-width: var(--measure-prose);
+}
+
+a {
+  color: var(--brand-text);
+  text-underline-offset: 0.18em;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.9375em;
+}
+
+/* Digits that sit in columns must not wobble between renders. */
+table,
+[data-numeric] {
+  font-variant-numeric: tabular-nums;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: var(--border-width-strong) solid var(--primary);
+  outline-offset: var(--ring-offset);
+  box-shadow: var(--ring);
+}
+
+/* Wide content scrolls inside its own box; the page body never scrolls
+   sideways. Generated tables and code blocks are the usual offenders. */
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: var(--fs-base);
+    line-height: var(--lh-body);
+    color: var(--text);
+    background: var(--page);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: var(--fw-display);
+    line-height: var(--lh-heading);
+    color: var(--text);
+}
+
+h1 {
+    font-size: var(--fs-4xl);
+    max-width: var(--measure-display);
+}
+
+h2 {
+    font-size: var(--fs-3xl);
+    max-width: var(--measure-display);
+    margin-bottom: var(--space-3);
+}
+
+h3 {
+    font-size: var(--fs-2xl);
+}
+
+p {
+    max-width: var(--measure-prose);
+    margin-bottom: var(--space-2);
+}
+
+.hero-lead {
+    font-size: var(--fs-lg);
+    max-width: var(--measure-lead);
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+}
+
+/* Navigation */
+.navbar {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    box-shadow: var(--shadow-1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-3) var(--space-4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-semibold);
+    color: var(--brand-text);
+}
+
+.nav-brand i {
+    font-size: var(--fs-2xl);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: var(--space-4);
+}
+
+.nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: var(--fw-medium);
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a:focus {
+    color: var(--brand-text);
+    outline: none;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--text);
+    margin: 5px 0;
+    transition: 0.3s;
+    border-radius: var(--radius-sm);
+}
+
+/* Hero Section */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+    padding: var(--space-9) var(--space-4);
+    background: linear-gradient(135deg, var(--surface-accent) 0%, var(--surface) 100%);
+}
+
+.hero-content h1 {
+    margin-bottom: var(--space-4);
+    animation: slideUp 0.8s ease-out;
+}
+
+.hero-lead {
+    animation: slideUp 0.8s ease-out 0.1s both;
+}
+
+.hero-actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+.hero-visual img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    animation: slideUp 0.8s ease-out 0.3s both;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: var(--space-3) var(--space-5);
+    border: none;
+    border-radius: var(--radius);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-semibold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-body);
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    filter: brightness(1.1);
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--brand-text);
+    border: 2px solid var(--brand-text);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background: var(--brand-text);
+    color: var(--page);
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+/* Section Styles */
+section {
+    padding: var(--space-9) var(--space-4);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.section-header h2 {
+    margin-bottom: var(--space-2);
+}
+
+.section-header p {
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text-muted);
+    font-size: var(--fs-lg);
+}
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-5);
+}
+
+.service-card {
+    background: var(--surface);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.service-card:nth-child(1) { animation-delay: 0s; }
+.service-card:nth-child(2) { animation-delay: 0.1s; }
+.service-card:nth-child(3) { animation-delay: 0.2s; }
+.service-card:nth-child(4) { animation-delay: 0.3s; }
+.service-card:nth-child(5) { animation-delay: 0.4s; }
+.service-card:nth-child(6) { animation-delay: 0.5s; }
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-3);
+    border-color: var(--brand-text);
+}
+
+.service-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, hsl(calc(var(--accent-h) + 0deg), var(--accent-s), var(--accent-l)), hsl(calc(var(--accent-h) + 30deg), var(--accent-s), var(--accent-l)));
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-3);
+}
+
+.service-icon i {
+    font-size: var(--fs-2xl);
+    color: var(--text);
+}
+
+.service-card h3 {
+    margin-bottom: var(--space-2);
+}
+
+.service-card p {
+    color: var(--text-muted);
+    font-size: var(--fs-base);
+}
+
+/* Portfolio Section */
+.portfolio {
+    background: var(--surface);
+}
+
+.portfolio-filters {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: var(--space-2) var(--space-4);
+    background: var(--surface-2);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-pill);
+    color: var(--text);
+    cursor: pointer;
+    font-weight: var(--fw-medium);
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--primary);
+    color: var(--on-primary);
+    border-color: var(--primary);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-5);
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    aspect-ratio: 1;
+    cursor: pointer;
+    opacity: 1;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05);
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-overlay h3 {
+    color: white;
+    margin-bottom: var(--space-1);
+}
+
+.portfolio-overlay p {
+    color: var(--text-faint);
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-3);
+}
+
+.view-link {
+    color: var(--brand-text);
+    text-decoration: none;
+    font-weight: var(--fw-semibold);
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.view-link:hover {
+    transform: translateX(4px);
+}
+
+/* Testimonials Section */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-5);
+}
+
+.testimonial-card {
+    background: var(--surface);
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.testimonial-card:nth-child(1) { animation-delay: 0s; }
+.testimonial-card:nth-child(2) { animation-delay: 0.1s; }
+.testimonial-card:nth-child(3) { animation-delay: 0.2s; }
+
+.stars {
+    color: #fbbf24;
+    font-size: var(--fs-lg);
+    letter-spacing: 2px;
+}
+
+.testimonial-card p {
+    flex-grow: 1;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-3);
+}
+
+.author-info strong {
+    display: block;
+    color: var(--text);
+    font-size: var(--fs-base);
+}
+
+.author-info span {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+}
+
+/* Pricing Section */
+.pricing {
+    background: var(--surface-accent);
+}
+
+.pricing-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-8);
+}
+
+.pricing-toggle label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-weight: var(--fw-medium);
+}
+
+.pricing-toggle input {
+    display: none;
+}
+
+.toggle-slider {
+    width: 50px;
+    height: 28px;
+    background: var(--border);
+    border-radius: var(--radius-pill);
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.toggle-slider::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: var(--page);
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: left 0.3s;
+}
+
+.pricing-toggle input:checked + span + .toggle-slider::after {
+    left: 24px;
+}
+
+.pricing-toggle input:checked ~ span:last-child {
+    color: var(--brand-text);
+}
+
+.pricing-toggle input:checked ~ span:first-of-type {
+    color: var(--text-muted);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-5);
+    align-items: start;
+}
+
+.pricing-card {
+    background: var(--surface);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-3);
+}
+
+.pricing-card.featured {
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.05) translateY(-8px);
+}
+
+.featured-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: var(--on-primary);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+}
+
+.pricing-header h3 {
+    margin-bottom: var(--space-1);
+}
+
+.pricing-header p {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+}
+
+.pricing-amount {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+}
+
+.price {
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-display);
+    color: var(--text);
+}
+
+.period {
+    color: var(--text-muted);
+    font-size: var(--fs-base);
+}
+
+.pricing-features {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.pricing-features li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) 0;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+}
+
+.pricing-features li:last-child {
+    border-bottom: none;
+}
+
+.pricing-features i {
+    font-size: var(--fs-lg);
+    color: var(--success);
+}
+
+.pricing-features li:has(i[data-cld-icon="x"]) i {
+    color: var(--text-faint);
+}
+
+.pricing-card .btn {
+    width: 100%;
+}
+
+/* Process Section */
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-5);
+}
+
+.process-step {
+    text-align: center;
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    position: relative;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.process-step:nth-child(1) { animation-delay: 0s; }
+.process-step:nth-child(2) { animation-delay: 0.1s; }
+.process-step:nth-child(3) { animation-delay: 0.2s; }
+.process-step:nth-child(4) { animation-delay: 0.3s; }
+.process-step:nth-child(5) { animation-delay: 0.4s; }
+.process-step:nth-child(6) { animation-delay: 0.5s; }
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: var(--on-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--fw-display);
+    font-size: var(--fs-lg);
+}
+
+.process-step i {
+    font-size: 2.5rem;
+    color: var(--brand-text);
+    margin-bottom: var(--space-3);
+}
+
+.process-step h3 {
+    margin-bottom: var(--space-2);
+}
+
+.process-step p {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    margin: 0;
+}
+
+/* Contact Section */
+.contact {
+    background: var(--surface-accent);
+}
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: start;
+}
+
+.contact-info h2 {
+    margin-bottom: var(--space-3);
+}
+
+.contact-info p {
+    color: var(--text-muted);
+    margin-bottom: var(--space-5);
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.contact-item {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.contact-item i {
+    font-size: var(--fs-2xl);
+    color: var(--brand-text);
+    flex-shrink: 0;
+}
+
+.contact-item strong {
+    display: block;
+    color: var(--text);
+    margin-bottom: var(--space-1);
+}
+
+.contact-item p {
+    color: var(--text-muted);
+    font-size: var(--fs-base);
+    margin: 0;
+}
+
+/* Form Styles */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.form-group label {
+    font-weight: var(--fw-semibold);
+    color: var(--text);
+    text-transform: uppercase;
+    font-size: var(--fs-sm);
+    letter-spacing: var(--tracking-label);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: var(--space-3);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: var(--fs-base);
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--brand-text);
+    box-shadow: 0 0 0 3px var(--ring);
+}
+
+.form-group input.error,
+.form-group textarea.error {
+    border-color: var(--danger);
+}
+
+.error-message {
+    color: var(--danger);
+    font-size: var(--fs-sm);
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+.form-message {
+    padding: var(--space-3);
+    border-radius: var(--radius);
+    text-align: center;
+    font-weight: var(--fw-medium);
+}
+
+.success-message {
+    background: var(--success-soft);
+    color: var(--success-ink);
+}
+
+/* Footer */
+.footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: var(--space-8) var(--space-4) var(--space-4);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-5);
+    margin-bottom: var(--space-5);
+}
+
+.footer-section h3,
+.footer-section h4 {
+    margin-bottom: var(--space-3);
+    color: var(--text);
+}
+
+.footer-section p {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: var(--space-2);
+}
+
+.footer-section a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: var(--brand-text);
+}
+
+.social-links {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+}
+
+.social-links i {
+    font-size: var(--fs-xl);
+    color: var(--text-muted);
+}
+
+.social-links a:hover i {
+    color: var(--brand-text);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding: var(--space-6) var(--space-4);
+    }
+
+    h1 {
+        font-size: var(--fs-2xl);
+    }
+
+    h2 {
+        font-size: var(--fs-2xl);
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .services-grid,
+    .portfolio-grid,
+    .testimonials-grid,
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-card.featured {
+        transform: scale(1);
+    }
+
+    .pricing-card.featured:hover {
+        transform: translateY(-8px);
+    }
+
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-filters {
+        margin-bottom: var(--space-5);
+    }
+
+    .pricing-toggle {
+        margin-bottom: var(--space-5);
+    }
+
+    section {
+        padding: var(--space-6) var(--space-4);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 var(--space-3);
+    }
+
+    h1 {
+        font-size: var(--fs-xl);
+    }
+
+    h2 {
+        font-size: var(--fs-xl);
+    }
+
+    .hero {
+        padding: var(--space-4) var(--space-3);
+    }
+
+    .nav-container {
+        padding: var(--space-2) var(--space-3);
+    }
+
+    .section-header {
+        margin-bottom: var(--space-5);
+    }
+
+    .services-grid,
+    .portfolio-grid,
+    .testimonials-grid,
+    .pricing-grid,
+    .process-steps {
+        gap: var(--space-3);
+    }
+
+    .service-card,
+    .pricing-card,
+    .testimonial-card,
+    .process-step {
+        padding: var(--space-4);
+    }
+
+    section {
+        padding: var(--space-4) var(--space-3);
+    }
+
+    .footer-content {
+        gap: var(--space-3);
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Focus Visible */
+*:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
