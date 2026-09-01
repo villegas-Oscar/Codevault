@@ -347,3 +347,83 @@ if (!('scrollBehavior' in document.documentElement.style)) {
   if (document.readyState === 'complete') setTimeout(reveal, 900);
   else window.addEventListener('load', function(){ setTimeout(reveal, 900); });
 })();
+
+// ===== DATOS DE PROYECTOS (accesibles globalmente) =====
+const projectData = {
+    web: {
+        title: "Desarrollo Web - E-commerce Platform",
+        image: "assets/img/captura.JPG",
+        description: "Plataforma de comercio electrónico construida con React y Node.js, manejando más de 10,000 transacciones diarias con una interfaz intuitiva y responsive."
+    },
+    automation: {
+        title: "Automatización Industrial - Sistema IoT",
+        image: "assets/img/sitio.JPG", // Usa la misma imagen por ahora
+        description: "Sistema de monitoreo y control de sensores industriales usando Arduino UNO, con dashboards en tiempo real para optimización de procesos de manufactura."
+    },
+    cloud: {
+        title: "Soluciones Cloud - Migración AWS",
+        image: "assets/img/sitio.JPG",
+        description: "Migración completa de infraestructura on-premise a AWS, reduciendo costos en 40% y mejorando la disponibilidad al 99.9%."
+    },
+    ia: {
+        title: "Integración de IA - Asistente Virtual con NLP",
+        image: "assets/img/sitio.JPG",
+        description: "Chatbot inteligente con procesamiento de lenguaje natural (NLP) que resuelve el 85% de las consultas de soporte de forma autónoma."
+    },
+    devops: {
+        title: "DevOps - CI/CD Pipeline Automatizado",
+        image: "assets/img/sitio.JPG",
+        description: "Pipeline de integración y despliegue continuo con Jenkins, Docker y Kubernetes, reduciendo el tiempo de deployment de 4 horas a 15 minutos."
+    },
+    seguridad: {
+        title: "Seguridad - Auditoría y Compliance GDPR",
+        image: "assets/img/sitio.JPG",
+        description: "Auditoría de seguridad completa, implementación de políticas de protección de datos y certificación GDPR para una fintech europea."
+    }
+};
+
+// ===== FUNCIONES DEL MODAL =====
+function openModal(projectId) {
+    console.log('Abriendo modal para:', projectId); // Para depuración
+    
+    const modal = document.getElementById('projectModal');
+    const project = projectData[projectId];
+    
+    if (!project) {
+        console.error('Proyecto no encontrado:', projectId);
+        return;
+    }
+    
+    // Actualizar contenido del modal
+    document.getElementById('modalTitle').textContent = project.title;
+    document.getElementById('modalImage').src = project.image;
+    document.getElementById('modalDescription').textContent = project.description;
+    
+    // Mostrar modal
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('projectModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function closeModalOutside(event) {
+    if (event.target === document.getElementById('projectModal')) {
+        closeModal();
+    }
+}
+
+// Cerrar con tecla ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});
+
+// ===== INICIALIZACIÓN =====
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ CodeVault inicializado correctamente');
+    console.log('📂 Proyectos disponibles:', Object.keys(projectData));
+});

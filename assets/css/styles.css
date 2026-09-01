@@ -1617,3 +1617,272 @@ section {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
 }
+
+/* ============================================================================
+   MODAL — Diseño adaptado a tu sistema de variables
+   ========================================================================= */
+
+/* Fondo del modal (overlay) */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--scrim);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-4);
+    animation: modalFadeIn var(--dur) var(--ease);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Contenedor principal del modal */
+.modal-content {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    max-width: 780px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: var(--space-6);
+    position: relative;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-3);
+    animation: modalSlideIn var(--dur) var(--ease);
+}
+
+/* Scroll personalizado para el modal */
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+.modal-content::-webkit-scrollbar-track {
+    background: var(--surface-2);
+    border-radius: var(--radius-pill);
+}
+.modal-content::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: var(--radius-pill);
+}
+
+/* Botón de cerrar (X) */
+.modal-close {
+    position: sticky;
+    float: right;
+    top: 0;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    width: 40px;
+    height: 40px;
+    font-size: var(--fs-xl);
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all var(--dur-fast) var(--ease);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-3);
+    z-index: 10;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    background: var(--danger-soft);
+    color: var(--danger);
+    border-color: var(--danger);
+    transform: rotate(90deg);
+}
+
+/* Título del proyecto */
+.modal-title {
+    font-family: var(--font-display);
+    font-weight: var(--fw-display);
+    font-size: var(--fs-2xl);
+    color: var(--text);
+    margin-bottom: var(--space-3);
+    line-height: var(--lh-heading);
+    letter-spacing: var(--tracking-display);
+    max-width: var(--measure-display);
+    clear: both;
+}
+
+/* Etiqueta de servicio */
+.modal-badge {
+    display: inline-block;
+    background: var(--surface-accent);
+    color: var(--brand-text);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+}
+
+/* Contenedor de la imagen */
+.modal-image-wrapper {
+    background: var(--surface-2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: var(--space-3) 0 var(--space-4);
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+.modal-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--dur) var(--ease);
+}
+
+.modal-image-wrapper:hover .modal-image {
+    transform: scale(1.02);
+}
+
+/* Badge de estado en la imagen */
+.modal-image-badge {
+    position: absolute;
+    bottom: var(--space-3);
+    right: var(--space-3);
+    background: var(--success-soft);
+    color: var(--success-ink);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    border: 1px solid var(--success);
+    backdrop-filter: blur(4px);
+}
+
+/* Descripción del proyecto */
+.modal-description {
+    font-size: var(--fs-base);
+    line-height: var(--lh-body);
+    color: var(--text-muted);
+    margin: var(--space-3) 0 var(--space-5);
+    max-width: var(--measure-prose);
+}
+
+/* Características del proyecto (grid) */
+.modal-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-3);
+    margin: var(--space-4) 0;
+    padding: var(--space-4);
+    background: var(--surface-2);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.modal-feature-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text);
+    font-size: var(--fs-sm);
+}
+
+.modal-feature-item i {
+    color: var(--brand-text);
+    font-size: var(--fs-md);
+}
+
+/* Footer del modal con CTA */
+.modal-footer {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.modal-footer .btn {
+    min-width: 140px;
+}
+
+.modal-footer .btn-secondary {
+    border-color: var(--border-strong);
+}
+
+/* Variante para el botón "Ver proyecto" */
+.modal-footer .btn-tertiary {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+}
+
+.modal-footer .btn-tertiary:hover {
+    background: var(--surface-2);
+    color: var(--text);
+}
+
+/* Animaciones */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: var(--space-4);
+        margin: var(--space-3);
+        max-height: 95vh;
+    }
+
+    .modal-title {
+        font-size: var(--fs-xl);
+    }
+
+    .modal-features {
+        grid-template-columns: 1fr 1fr;
+        padding: var(--space-3);
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-footer .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: var(--space-3);
+        margin: var(--space-2);
+    }
+
+    .modal-close {
+        width: 32px;
+        height: 32px;
+        font-size: var(--fs-lg);
+    }
+
+    .modal-features {
+        grid-template-columns: 1fr;
+    }
+}
